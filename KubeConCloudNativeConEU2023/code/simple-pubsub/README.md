@@ -30,3 +30,14 @@ kubectl apply -f ./deploy/publisher-service.yaml
 # Add the subscriber-service
 kubectl apply -f ./deploy/subscriber-service.yaml
 ```
+
+To see the logs
+```bash
+watch kubectl logs $(kubectl get pods | grep publisher | grep Running | awk '{print $1}')
+watch kubectl logs $(kubectl get pods | grep subscriber | grep Running | awk '{print $1}')
+```
+
+Clean up
+```bash
+kubectl delete -f ./deploy
+```

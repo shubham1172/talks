@@ -1,52 +1,52 @@
-# kind: Service
-# apiVersion: v1
-# metadata:
-#   name: publisher-service
-#   labels:
-#     app: publisher
-# spec:
-#   selector:
-#     app: publisher
-#   ports:
-#     - protocol: TCP
-#       port: 80
-#       targetPort: 3000
-#   type: LoadBalancer
-# ---
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#   name: nodeapp
-#   labels:
-#     app: node
-# spec:
-#   replicas: 1
-#   selector:
-#     matchLabels:
-#       app: node
-#   template:
-#     metadata:
-#       labels:
-#         app: node
-#       annotations:
-#         dapr.io/enabled: "true"
-#         dapr.io/app-id: "nodeapp"
-#         dapr.io/app-port: "3000"
-#         dapr.io/enable-api-logging: "true"
-#     spec:
-#       containers:
-#         - name: node
-#           image: ghcr.io/dapr/samples/hello-k8s-node:latest
-#           env:
-#             - name: APP_PORT
-#               value: "3000"
-#           ports:
-#             - containerPort: 3000
-#           imagePullPolicy: Always
-#           resources:
-#             limits:
-#               cpu: 100m
-#               memory: 100Mi
-#             requests:
-#               cpu: 100m
-#               memory: 100Mi
+kind: Service
+apiVersion: v1
+metadata:
+  name: subscriber-service
+  labels:
+    app: subscriber
+spec:
+  selector:
+    app: subscriber
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: subscriberapp
+  labels:
+    app: subscriber
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: subscriber
+  template:
+    metadata:
+      labels:
+        app: subscriber
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "subscriberapp"
+        dapr.io/app-port: "3000"
+        dapr.io/enable-api-logging: "true"
+    spec:
+      containers:
+        - name: node
+          image: ghcr.io/shubham1172/kubecon-demo/simple-pubsub-subscriber:0.1.0
+          env:
+            - name: APP_PORT
+              value: "3000"
+          ports:
+            - containerPort: 3000
+          imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: 100m
+              memory: 100Mi
+            requests:
+              cpu: 100m
+              memory: 100Mi
