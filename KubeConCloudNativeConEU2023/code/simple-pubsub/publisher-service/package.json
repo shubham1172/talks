@@ -1,0 +1,17 @@
+{
+  "name": "simple-pubsub",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "start:dapr": "dapr run --app-id simple-pubsub --dapr-http-port 3500 --resources-path ./resources -- node index.js"
+  },
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@dapr/dapr": "^3.0.0"
+  }
+}
