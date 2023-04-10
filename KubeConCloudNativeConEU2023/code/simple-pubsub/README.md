@@ -6,7 +6,7 @@ Here we have a simple publisher and subscriber. The publisher publishes a messag
 
 ## Prerequisites
 
-1. CLI tools: [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/), [helm](https://helm.sh/docs/intro/install/), [dapr](https://docs.dapr.io/getting-started/install-dapr-cli/)
+1. CLI tools: [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/), [helm](https://helm.sh/docs/intro/install/), [dapr](https://docs.dapr.io/getting-started/install-dapr-cli/), [kubetail](https://github.com/johanhaleby/kubetail)
 
 2. Install Dapr on your Kubernetes cluster. 
 ```bash
@@ -22,19 +22,16 @@ helm install redis bitnami/redis --set image.tag=6.2
 
 ## Running the sample
 
+Deploy
 ```bash
-# Add the Redis component
-kubectl apply -f ./deploy/redis-pubsub.yaml
-# Add the publisher-service 
-kubectl apply -f ./deploy/publisher-service.yaml
-# Add the subscriber-service
-kubectl apply -f ./deploy/subscriber-service.yaml
+kubectl apply -f deploy
 ```
 
-To see the logs
+See the logs
 ```bash
-watch kubectl logs $(kubectl get pods | grep publisher | grep Running | awk '{print $1}')
-watch kubectl logs $(kubectl get pods | grep subscriber | grep Running | awk '{print $1}')
+kubetail publisherapp -c publisher
+kubetail subscriberapp -c subscriber
+kubetail subscriberapp-2 -c subscriber
 ```
 
 Clean up

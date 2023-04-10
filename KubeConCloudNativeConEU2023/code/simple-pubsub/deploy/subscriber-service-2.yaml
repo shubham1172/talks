@@ -1,12 +1,12 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: subscriber-service
+  name: subscriber-service-2
   labels:
-    app: subscriber
+    app: subscriber-2
 spec:
   selector:
-    app: subscriber
+    app: subscriber-2
   ports:
     - protocol: TCP
       port: 80
@@ -16,21 +16,21 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: subscriberapp
+  name: subscriberapp-2
   labels:
-    app: subscriber
+    app: subscriber-2
 spec:
-  replicas: 1 # Change this to 3 to scale the subscriber!
+  replicas: 1
   selector:
     matchLabels:
-      app: subscriber
+      app: subscriber-2
   template:
     metadata:
       labels:
-        app: subscriber
+        app: subscriber-2
       annotations:
         dapr.io/enabled: "true"
-        dapr.io/app-id: "subscriberapp"
+        dapr.io/app-id: "subscriberapp-2"
         dapr.io/app-port: "3000"
         dapr.io/enable-api-logging: "true"
     spec:
