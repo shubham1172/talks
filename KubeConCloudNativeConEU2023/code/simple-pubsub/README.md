@@ -22,3 +22,11 @@ helm install redis bitnami/redis --set image.tag=6.2
 
 ## Running the sample
 
+```bash
+# Add the Redis component
+kubectl apply -f ./deploy/redis-pubsub.yaml
+# Add the publisher-service 
+kubectl apply -f ./deploy/publisher-service.yaml
+# Add the subscriber-service
+kubectl apply -f ./deploy/subscriber-service.yaml
+```
