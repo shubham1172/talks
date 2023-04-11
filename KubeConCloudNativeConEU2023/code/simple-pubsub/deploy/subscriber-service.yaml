@@ -40,6 +40,10 @@ spec:
           env:
             - name: APP_PORT
               value: "3000"
+            - name: PUBSUB_NAME
+              value: "kafka-pubsub"
+            - name: TOPIC_NAME
+              value: "orders"
           ports:
             - containerPort: 3000
           imagePullPolicy: Always

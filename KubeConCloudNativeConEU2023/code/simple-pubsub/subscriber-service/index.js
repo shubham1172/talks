@@ -1,7 +1,7 @@
 import { DaprServer } from "@dapr/dapr";
 
-const pubSubName = "redis-pubsub";
-const topicName = "orders";
+const pubSubName = process.env.PUBSUB_NAME || "pubsub";
+const topicName = process.env.TOPIC_NAME || "orders";
 
 const serverPort = process.env.SERVER_PORT || 3000;
 

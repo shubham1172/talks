@@ -18,13 +18,16 @@ dapr init -k
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm repo update
 helm install redis bitnami/redis --set image.tag=6.2
+helm install kafka bitnami/kafka --set image.tag=3.4.0
 ```
 
 ## Running the sample
 
 Deploy
 ```bash
-kubectl apply -f deploy
+kubectl apply -f deploy/redis-pubsub.yaml
+kubectl apply -f deploy/publisher-service.yaml
+kubectl apply -f deploy/subscriber-service.yaml
 ```
 
 See the logs
