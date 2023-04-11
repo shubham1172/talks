@@ -41,7 +41,7 @@ spec:
             - name: APP_PORT
               value: "3000"
             - name: PUBSUB_NAME
-              value: "kafka-pubsub"
+              value: "redis-pubsub"
             - name: TOPIC_NAME
               value: "orders"
           ports:

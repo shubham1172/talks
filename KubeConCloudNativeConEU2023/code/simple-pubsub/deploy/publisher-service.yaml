@@ -24,7 +24,7 @@ spec:
           imagePullPolicy: Always
           env:
             - name: PUBSUB_NAME
-              value: "kafka-pubsub"
+              value: "redis-pubsub"
             - name: TOPIC_NAME
               value: "orders"
           resources:

@@ -26,18 +26,35 @@ helm install kafka bitnami/kafka --set image.tag=3.4.0
 Deploy
 ```bash
 kubectl apply -f deploy/redis-pubsub.yaml
-kubectl apply -f deploy/publisher-service.yaml
 kubectl apply -f deploy/subscriber-service.yaml
+kubectl apply -f deploy/publisher-service.yaml
 ```
 
 See the logs
 ```bash
-kubetail publisherapp -c publisher
 kubetail subscriberapp -c subscriber
-kubetail subscriberapp-2 -c subscriber
+kubetail publisherapp -c publisher
+```
+
+Swapping component
+```bash
+kubectl delete -f deploy/redis-pubsub.yaml
+kubectl apply -f deploy/kafka-pubsub.yaml
+kubectl set env deployment publisherapp PUBSUB_NAME=kafka-pubsub
+kubectl set env deployment subscriberapp PUBSUB_NAME=kafka-pubsub
+```
+
+Scaling the subscriber
+```bash
+kubectl scale deployment subscriberapp --replicas=3
+```
+
+Adding an additional subscriber
+```bash
+kubectl apply -f deploy/subscriber-service-2.yaml
 ```
 
 Clean up
 ```bash
-kubectl delete -f ./deploy
+kubectl delete -f ./deploy --ignore-not-found=true
 ```
