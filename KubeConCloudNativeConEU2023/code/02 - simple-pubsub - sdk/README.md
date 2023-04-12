@@ -1,8 +1,6 @@
-# Demo #1
+# Simple Pub/Sub Sample using JS-SDK
 
-This sample demonstrates how to use the Pub/Sub API to publish and subscribe to messages.
-Here we have a simple publisher and subscriber. The publisher publishes a message to a topic, and the subscriber receives the message and prints it out. They run as Kubernetes pods.
-
+This sample demonstrates how to use Dapr's JS-SDK to publish and subscribe to messages. Here we have a simple publisher and subscriber. The publisher publishes a message to a topic, and the subscriber receives the message and prints it out. The setup runs on Kubernetes.
 
 ## Prerequisites
 
@@ -38,10 +36,10 @@ kubetail publisherapp -c publisher
 
 Swapping component
 ```bash
-kubectl delete -f deploy/redis-pubsub.yaml
 kubectl apply -f deploy/kafka-pubsub.yaml
 kubectl set env deployment publisherapp PUBSUB_NAME=kafka-pubsub
 kubectl set env deployment subscriberapp PUBSUB_NAME=kafka-pubsub
+kubectl delete -f deploy/redis-pubsub.yaml
 ```
 
 Scaling the subscriber
