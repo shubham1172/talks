@@ -2,6 +2,8 @@
 
 This sample demonstrates how to use the Bulk Pub/Sub HTTP APIs to publish and subscribe to messages in bulk. This uses the Dapr's self-hosted mode to run locally on your machine.
 
+API reference: https://v1-11.docs.dapr.io/reference/api/pubsub_api/
+
 ## Prerequisites
 
 1. [Install Dapr CLI](https://docs.dapr.io/getting-started/install-dapr-cli/)
