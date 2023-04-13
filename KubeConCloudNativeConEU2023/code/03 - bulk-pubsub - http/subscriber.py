@@ -30,7 +30,7 @@ class MyHandler(BaseHTTPRequestHandler):
             post_data = self.rfile.read(content_length)
             json_data = json.loads(post_data)
             print(f'Received {len(json_data["entries"])} entries', flush=True)
-            
+
             # Prepare a response
             response = {
                 "statuses": []
@@ -48,7 +48,7 @@ class MyHandler(BaseHTTPRequestHandler):
                     "status": "SUCCESS"
                 })
 
-            print("Sending reponse", json.dumps(response), flush=True)
+            print("Sending response", json.dumps(response), flush=True)
 
             self.send_response(200)
             self.send_header('Content-type', 'application/json')
