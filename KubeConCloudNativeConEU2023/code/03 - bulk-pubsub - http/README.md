@@ -1,0 +1,35 @@
+# Bulk Pub/Sub Sample using HTTP APIs
+
+This sample demonstrates how to use the Bulk Pub/Sub HTTP APIs to publish and subscribe to messages in bulk. This uses the Dapr's self-hosted mode to run locally on your machine.
+
+API reference: https://v1-11.docs.dapr.io/reference/api/pubsub_api/
+
+## Prerequisites
+
+1. [Install Dapr CLI](https://docs.dapr.io/getting-started/install-dapr-cli/)
+
+2. Install Dapr on your local machine.
+```bash
+dapr init
+```
+
+## Publishing messages in bulk
+
+1. Run a daprd process for publishing messages.
+```bash
+dapr run --app-id bulk-publisher-app --dapr-http-port 3500 -- sleep 1000
+```
+
+2. Use bulk-publish.http to publish messages to a topic.
+
+3. Use a Redis client to validate (e.g. Redis CLI or Medis)
+
+4. Visualize using Zipkin!
+
+## Subscribing to messages
+
+1. Run the subscriber application
+```bash
+dapr run --app-id bulk-subscriber-app --app-protocol http --app-port 3000 -- python3 subscriber.py
+```
+

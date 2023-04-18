@@ -1,0 +1,56 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: subscriber-service-2
+  labels:
+    app: subscriber-2
+spec:
+  selector:
+    app: subscriber-2
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: subscriberapp-2
+  labels:
+    app: subscriber-2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: subscriber-2
+  template:
+    metadata:
+      labels:
+        app: subscriber-2
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "subscriberapp-2"
+        dapr.io/app-port: "3000"
+        dapr.io/enable-api-logging: "true"
+    spec:
+      containers:
+        - name: subscriber
+          image: ghcr.io/shubham1172/kubecon-demo/simple-pubsub-subscriber:0.1.0
+          env:
+            - name: APP_PORT
+              value: "3000"
+            - name: PUBSUB_NAME
+              value: "redis-pubsub"
+            - name: TOPIC_NAME
+              value: "orders"
+          ports:
+            - containerPort: 3000
+          imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: 100m
+              memory: 100Mi
+            requests:
+              cpu: 100m
+              memory: 100Mi
