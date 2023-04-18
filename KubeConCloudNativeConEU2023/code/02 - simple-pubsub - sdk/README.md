@@ -34,14 +34,6 @@ kubetail subscriberapp -c subscriber
 kubetail publisherapp -c publisher
 ```
 
-Swapping component
-```bash
-kubectl apply -f deploy/kafka-pubsub.yaml
-kubectl set env deployment publisherapp PUBSUB_NAME=kafka-pubsub
-kubectl set env deployment subscriberapp PUBSUB_NAME=kafka-pubsub
-kubectl delete -f deploy/redis-pubsub.yaml
-```
-
 Scaling the subscriber
 ```bash
 kubectl scale deployment subscriberapp --replicas=3
@@ -50,6 +42,14 @@ kubectl scale deployment subscriberapp --replicas=3
 Adding an additional subscriber
 ```bash
 kubectl apply -f deploy/subscriber-service-2.yaml
+kubetail subscriberapp-2 -c subscriber
+```
+
+Swapping component
+```bash
+kubectl apply -f deploy/kafka-pubsub.yaml
+kubectl set env deployment publisherapp PUBSUB_NAME=kafka-pubsub
+kubectl set env deployment subscriberapp PUBSUB_NAME=kafka-pubsub
 ```
 
 Clean up
