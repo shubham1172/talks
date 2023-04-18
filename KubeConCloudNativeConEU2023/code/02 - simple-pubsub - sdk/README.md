@@ -11,7 +11,7 @@ This sample demonstrates how to use Dapr's JS-SDK to publish and subscribe to me
 dapr init -k
 ```
 
-3. Install Redis on your Kubernetes cluster. 
+3. Install Redis and Kafka on your Kubernetes cluster. 
 ```bash
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm repo update
